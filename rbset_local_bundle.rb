@@ -56,15 +56,27 @@ class GemDirs
     return [] if gem_filename.empty?
     [
       [File.join(@root, 'cache', "#{gem_filename}.gem"), File.join('cache')],
+      extensions_entry,
       [File.join(@root, 'gems', "#{gem_filename}", '*'), File.join('gems', "#{gem_filename}")],
       [File.join(@root, 'specifications', "#{gem_filename}.gemspec"), File.join('specifications')]
-    ]
+    ].compact
+  end
+
+  def extensions_entry
+    hit = Dir[File.join(@root, 'extensions', '**', "#{gem_version}")].first.to_s
+    unless hit.empty?
+      [File.join(hit, '*'), hit.sub("#{@root}/", '')]
+    end
+  end
+
+  def gem_version
+    "#{@name}-#{@version.to_s}"
   end
 
   def gem_filename
     # looking for native gems with platform in the name
     @gem_filename ||= begin
-      glob = File.join(@root, 'cache', "#{@name}-#{@version.to_s}*.gem")
+      glob = File.join(@root, 'cache', "#{gem_version}*.gem")
       File.basename(Dir[glob].first.to_s.sub(/\.gem\z/, ''))
     end
   end
