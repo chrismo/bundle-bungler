@@ -94,16 +94,3 @@ sync.sync_gems(
     end
   end
 )
-
-# mkdir -p ./zzz/ruby/2.3.0 && rsync -av  ~/.bundle/ruby/2.3.0/ ./zzz/ruby/2.3.0
-# if you grab the versions from the Gemfile.lock ... could rsync just the versions?
-
-
-# [["no_moss", Gem::Version.new("0.5.0")],
-#  ["aasm", Gem::Version.new("4.1.0")],
-#  ["action_event", Gem::Version.new("2.13.1")],
-#  ["actionmailer", Gem::Version.new("4.1.14.2")],
-#  ["actionpack", Gem::Version.new("4.1.14.2")],
-#  ["actionview", Gem::Version.new("4.1.14.2")],
-#  ["activemodel", Gem::Version.new("4.1.14.2")],
-#  ["activerecord", Gem::Version.new("4.1.14.2")],
