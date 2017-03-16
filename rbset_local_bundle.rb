@@ -25,6 +25,7 @@ class GemSync
   def sync_thing(src, dst_stub)
     dst = File.join(@dst, dst_stub)
     FileUtils.makedirs dst
+    # TODO: cp -s ain't on OS X. ln won't recurse, so ... just need to recurse ourselves, creating dirs, and links.
     cmd = "rsync -a #{src} #{dst}"
     puts cmd
     system cmd
@@ -91,7 +92,7 @@ parser = Bundler::LockfileParser.new(Bundler.read_file(lockfile))
 
 # pp parser.specs.detect { |s| s.name =~ /lib/ }; exit
 
-@root = "/Users/chrismo/.bundle/ruby/#{ruby_version}"
+@root = File.expand_path("~/.bundle/ruby/#{ruby_version}")
 @dst = File.join(Dir.pwd, 'zz', 'ruby', ruby_version)
 
 FileUtils.makedirs @dst
