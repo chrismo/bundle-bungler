@@ -75,10 +75,13 @@ class GemDirs
   end
 
   def gem_filename
-    # looking for native gems with platform in the name
     @gem_filename ||= begin
-      glob = File.join(@root, 'cache', "#{gem_version}*.gem")
-      File.basename(Dir[glob].first.to_s.sub(/\.gem\z/, ''))
+      # dunno if can do optional characters in glob. so ... two globs
+      glob_generic = File.join(@root, 'cache', "#{gem_version}.gem")
+
+      # looking for native gems with platform in the name
+      glob_platform = File.join(@root, 'cache', "#{gem_version}-*.gem")
+      File.basename((Dir[glob_generic] + Dir[glob_platform]).first.to_s.sub(/\.gem\z/, ''))
     end
   end
 end
