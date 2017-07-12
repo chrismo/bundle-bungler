@@ -86,7 +86,7 @@ class GemDirs
   end
 end
 
-system 'bundle config --local path zz'
+system 'bundle config --local path .bundle'
 system 'bundle config --local disable_shared_gems true'
 
 lockfile = File.join(Dir.pwd, 'Gemfile.lock')
@@ -96,7 +96,7 @@ parser = Bundler::LockfileParser.new(Bundler.read_file(lockfile))
 # pp parser.specs.detect { |s| s.name =~ /lib/ }; exit
 
 @root = File.expand_path("~/.bundle/ruby/#{ruby_version}")
-@dst = File.join(Dir.pwd, 'zz', 'ruby', ruby_version)
+@dst = File.join(Dir.pwd, '.bundle', 'ruby', ruby_version)
 
 FileUtils.makedirs @dst
 

@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-bundle install --path zz
+bundle install --path .bundle
