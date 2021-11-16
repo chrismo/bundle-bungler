@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-bundle install --path .bundle
+bundle config set --local path '.bundle'
+bundle install
